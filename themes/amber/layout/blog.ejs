@@ -1,0 +1,47 @@
+<%
+var posts = site.posts.sort('-date').toArray();
+// 标签聚合
+var tagSet = {};
+posts.forEach(function (post) {
+  (post.tags ? post.tags.toArray() : []).forEach(function (t) { tagSet[t.name] = true; });
+});
+var allTags = Object.keys(tagSet).sort();
+%>
+<header class="page-head">
+  <h1>文章</h1>
+  <p class="lede">为了弄懂一个问题而写下的笔记。多半是数学，偶尔是系统。</p>
+</header>
+
+<section class="section" aria-labelledby="filter">
+  <h2 class="eyebrow" id="filter">筛选</h2>
+  <div class="filter-bar" data-filter-group="blog">
+    <div class="filter-row" role="group" aria-label="按标签筛选">
+      <button class="tag" data-filter-tag="all" aria-pressed="true">全部</button>
+      <% allTags.forEach(function (t) { %>
+      <button class="tag" data-filter-tag="<%= t %>" aria-pressed="false">#<%= t %></button>
+      <% }); %>
+    </div>
+  </div>
+
+  <div class="filter-empty" hidden data-empty>
+    <p>还没有这个标签下的文章。</p>
+    <button class="link-arrow" data-clear>清除筛选</button>
+  </div>
+
+  <ul class="post-list">
+    <% posts.forEach(function (post) {
+      var ptags = (post.tags ? post.tags.toArray() : []).map(function (t) { return t.name; });
+    %>
+    <li class="post-item" data-tags="<%= ptags.join(',') %>">
+      <span class="post-date"><%= date(post.date, 'YYYY.MM') %></span>
+      <div>
+        <a class="post-title" href="<%- url_for(post.path) %>"><%= post.title %></a>
+        <% if (post.excerpt) { %><p class="post-excerpt"><%= strip_html(post.excerpt) %></p><% } %>
+        <p class="post-tags">
+          <% ptags.forEach(function (t) { %><button class="tag" data-filter-tag="<%= t %>">#<%= t %></button><% }); %>
+        </p>
+      </div>
+    </li>
+    <% }); %>
+  </ul>
+</section>

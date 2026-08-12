@@ -1,0 +1,29 @@
+<footer class="footer">
+  <div class="wrap">
+    <p class="footer-prompt"><span class="u">magician336</span><span class="at">@</span><span class="h">home</span><span class="p">:~$</span><span class="cursor" aria-hidden="true"></span></p>
+    <div class="footer-cols">
+      <div>
+        <p class="eyebrow">联系</p>
+        <ul>
+          <li><a href="mailto:3125783940@qq.com">邮箱</a></li>
+          <li><a href="<%- url_for('/about/') %>#contact">联系方式</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="eyebrow">别处</p>
+        <ul>
+          <li><a href="https://github.com/magician336" rel="me">github</a></li>
+          <li><a href="<%- url_for('/atom.xml') %>">rss 订阅</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="eyebrow">本站</p>
+        <ul>
+          <li><a href="https://hexo.io/">由 hexo 驱动</a></li>
+          <li><a href="https://github.com/magician336/magician336.github.io">源码</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-meta">© <%= new Date().getFullYear() %> magician336 · 深色 / 琥珀 / 注释结构</p>
+  </div>
+</footer>

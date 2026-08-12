@@ -1,0 +1,56 @@
+<%
+var projects = site.data.projects || [];
+// 状态与标签聚合 (筛选条)
+var statuses = ['shipped', 'research', 'wip'];
+var tagSet = {};
+projects.forEach(function (p) {
+  (p.tags || []).forEach(function (t) { tagSet[t.toLowerCase()] = true; });
+});
+var allTags = Object.keys(tagSet).sort();
+// 按年分组, 年内按月倒序
+var byYear = {};
+projects.forEach(function (p) {
+  (byYear[p.year] = byYear[p.year] || []).push(p);
+});
+Object.keys(byYear).forEach(function (y) {
+  byYear[y].sort(function (a, b) { return (b.month || 0) - (a.month || 0); });
+});
+var years = Object.keys(byYear).sort().reverse();
+%>
+<header class="page-head">
+  <h1>项目</h1>
+  <p class="lede">我做过的、正在做的、正在研究的东西。<br>状态如实标注——wip 就是 wip。</p>
+</header>
+
+<section class="section" aria-labelledby="filter">
+  <h2 class="eyebrow" id="filter">筛选</h2>
+  <div class="filter-bar" data-filter-group="projects">
+    <div class="filter-row" role="group" aria-label="按状态筛选">
+      <button class="btn btn--ghost" data-filter-status="all" aria-pressed="true">全部</button>
+      <% statuses.forEach(function (s) { %>
+      <button class="btn btn--ghost" data-filter-status="<%= s %>" aria-pressed="false"><%= s %></button>
+      <% }); %>
+    </div>
+    <div class="filter-row" role="group" aria-label="按标签筛选">
+      <% allTags.forEach(function (t) { %>
+      <button class="tag" data-filter-tag="<%= t %>" aria-pressed="false">#<%= t %></button>
+      <% }); %>
+    </div>
+  </div>
+
+  <div class="filter-empty" hidden data-empty>
+    <p>没有符合这个筛选条件的项目。</p>
+    <button class="link-arrow" data-clear>清除筛选</button>
+  </div>
+
+  <% years.forEach(function (y) { %>
+  <div class="year-group">
+    <h2 class="year-title"><%= y %></h2>
+    <ul class="work-list work-list--full">
+      <% byYear[y].forEach(function (p) { %>
+      <%- partial('_partial/work-item', { p: p, full: true }) %>
+      <% }); %>
+    </ul>
+  </div>
+  <% }); %>
+</section>

@@ -1,0 +1,33 @@
+<%
+// 速查表展开页: page.sheet 指定 _data/cheatsheets/<sheet>.yml
+var sheet = (site.data.cheatsheets || {})[page.sheet];
+%>
+<header class="page-head">
+  <p class="eyebrow"><%= page.sheet %> · <%= sheet ? sheet.title : page.title %></p>
+  <h1><%= sheet ? sheet.title : page.title %></h1>
+  <% if (sheet && sheet.desc) { %><p class="lede"><%= sheet.desc %></p><% } %>
+</header>
+
+<% if (sheet && sheet.tables) { %>
+  <% sheet.tables.forEach(function (table) { %>
+  <div class="cheattable">
+    <table>
+      <caption><%= table.caption %></caption>
+      <thead>
+        <tr>
+          <% table.headers.forEach(function (h) { %><th><%= h %></th><% }); %>
+        </tr>
+      </thead>
+      <tbody>
+        <% table.rows.forEach(function (row) { %>
+        <tr>
+          <% row.forEach(function (cell) { %><td><%= cell %></td><% }); %>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+  <% }); %>
+<% } %>
+
+<p><a class="link-arrow link-arrow--back" href="<%- url_for('/tools/') %>">返回工具箱</a></p>

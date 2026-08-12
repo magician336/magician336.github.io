@@ -1,0 +1,23 @@
+<%
+var navItems = [
+  { label: '关于', path: '/about/' },
+  { label: '项目', path: '/projects/' },
+  { label: '文章', path: '/blog/' },
+  { label: '工具', path: '/tools/' }
+];
+var current = '/' + (page.path || '').replace(/index\.html$/, '');
+function isActive(item) {
+  if (item.path === '/blog/' && is_post()) return true;
+  return current.indexOf(item.path) === 0;
+}
+%>
+<nav class="nav" aria-label="主导航">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="<%- url_for('/') %>"><%= config.title %></a>
+    <ul class="nav-links">
+      <% navItems.forEach(function (item) { %>
+      <li><a href="<%- url_for(item.path) %>" class="<%= isActive(item) ? 'is-active' : '' %>"><%= item.label %></a></li>
+      <% }); %>
+    </ul>
+  </div>
+</nav>

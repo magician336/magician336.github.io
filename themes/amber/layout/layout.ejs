@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="<%= config.language || 'en' %>">
+<head>
+  <%- partial('_partial/head') %>
+</head>
+<body>
+  <%- partial('_partial/nav') %>
+  <main class="wrap">
+    <%- body %>
+  </main>
+  <%- partial('_partial/footer') %>
+  <script defer src="<%- url_for('/js/main.js') %>"></script>
+  <% if (page.path && page.path.indexOf('tools/') === 0) { %>
+  <script defer src="<%- url_for('/js/tools.js') %>"></script>
+  <% } %>
+</body>
+</html>

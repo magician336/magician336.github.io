@@ -1,0 +1,68 @@
+<%
+var hero = site.data.hero || {};
+var now = site.data.now || [];
+var projects = (site.data.projects || []).slice(0, 3);
+var posts = site.posts.sort('-date').limit(3);
+var stack = (site.data.stack || []);
+%>
+<section class="hero">
+  <h1 class="hero-name"><%= hero.name || config.title %></h1>
+  <div class="hero-intro">
+    <% (hero.intro || []).forEach(function (line) { %>
+    <p><%= line %></p>
+    <% }); %>
+  </div>
+  <p class="hero-cta">
+    <a class="link-arrow link-arrow--primary" href="<%- url_for('/projects/') %>"><%= hero.cta_primary || 'view work' %></a>
+    <a class="link-arrow" href="<%- url_for('/blog/') %>"><%= hero.cta_secondary || 'read blog' %></a>
+  </p>
+</section>
+
+<section class="section" aria-labelledby="now">
+  <h2 class="eyebrow" id="now">此刻</h2>
+  <ul class="kv-list">
+    <% now.forEach(function (item) { %>
+    <li>
+      <span class="kv-key"><%= item.key %></span>
+      <span class="kv-val"><%= item.val %><% if (item.meta) { %> <span class="kv-meta"><%= item.meta %></span><% } %></span>
+    </li>
+    <% }); %>
+  </ul>
+</section>
+
+<section class="section" aria-labelledby="work">
+  <div class="section-head">
+    <h2 id="work">精选项目</h2>
+    <a class="link-arrow" href="<%- url_for('/projects/') %>">全部项目</a>
+  </div>
+  <ul class="work-list">
+    <% projects.forEach(function (p) { %>
+    <%- partial('_partial/work-item', { p: p, full: false }) %>
+    <% }); %>
+  </ul>
+</section>
+
+<section class="section" aria-labelledby="writing">
+  <div class="section-head">
+    <h2 id="writing">最近文章</h2>
+    <a class="link-arrow" href="<%- url_for('/blog/') %>">全部文章</a>
+  </div>
+  <ul class="post-list">
+    <% posts.forEach(function (post) { %>
+    <li class="post-item">
+      <span class="post-date"><%= date(post.date, 'YYYY.MM') %></span>
+      <div>
+        <a class="post-title" href="<%- url_for(post.path) %>"><%= post.title %></a>
+        <% if (post.excerpt) { %><p class="post-excerpt"><%= strip_html(post.excerpt) %></p><% } %>
+      </div>
+    </li>
+    <% }); %>
+  </ul>
+</section>
+
+<section class="section" aria-labelledby="stack">
+  <h2 class="eyebrow" id="stack">技术栈</h2>
+  <p class="stack">
+    <% stack.forEach(function (t) { %><span class="tag"><%= t %></span><% }); %>
+  </p>
+</section>

@@ -1,0 +1,55 @@
+<%
+// 项目详情页: 按 front matter 的 project 键在 site.data.projects 中查
+var projects = site.data.projects || [];
+var p = null;
+projects.forEach(function (x) { if (x.slug === page.project) p = x; });
+%>
+<article>
+  <header class="article-head">
+    <p class="article-meta">
+      <span class="work-status work-status--<%= p ? p.status : '' %>"><%= p ? p.status : '' %></span>
+      <% if (p && p.year) { %> · <%= p.year %><% if (p.month) { %>.<%= String(p.month).padStart(2, '0') %><% } %><% } %>
+      <% if (p && p.tags) { p.tags.forEach(function (t) { %><span class="tag">#<%= t %></span><% }); } %>
+    </p>
+    <h1><%= page.title %></h1>
+    <% if (p && p.desc) { %><p class="lede"><%= p.desc %></p><% } %>
+  </header>
+
+  <div class="prose">
+    <% if (p && p.story) { p.story.forEach(function (para) { %><p><%= para %></p><% }); } %>
+
+    <% if (p && p.highlights) { %>
+    <p class="eyebrow">亮点</p>
+    <ul>
+      <% p.highlights.forEach(function (h) { %><li><%= h %></li><% }); %>
+    </ul>
+    <% } %>
+
+    <% if (p && p.stack && p.stack.length) { %>
+    <p class="eyebrow">技术栈</p>
+    <p class="work-tags">
+      <% p.stack.forEach(function (t) { %><span class="tag"><%= t %></span><% }); %>
+    </p>
+    <% } %>
+  </div>
+
+  <footer class="article-foot">
+    <ul class="kv-list">
+      <% if (p && p.links && p.links.repo) { %>
+      <li>
+        <span class="kv-key">// repo</span>
+        <span class="kv-val"><a href="<%= p.links.repo %>"><%= p.links.repo.replace(/^https?:\/\//, '') %></a></span>
+      </li>
+      <% } %>
+      <% if (p && p.links && p.links.live) { %>
+      <li>
+        <span class="kv-key">// live</span>
+        <span class="kv-val"><a href="<%= p.links.live %>"><%= p.links.live.replace(/^https?:\/\//, '') %></a></span>
+      </li>
+      <% } %>
+    </ul>
+    <nav class="article-nav" aria-label="返回项目列表">
+      <a class="link-arrow link-arrow--back" href="<%- url_for('/projects/') %>">返回项目</a>
+    </nav>
+  </footer>
+</article>

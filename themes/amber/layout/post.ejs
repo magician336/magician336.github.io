@@ -1,0 +1,44 @@
+<%
+// 简易阅读时长: 按 400 字/分钟 (中英混合粗略值)
+var words = strip_html(page.content).length;
+var minutes = Math.max(1, Math.round(words / 400));
+var ptags = (page.tags ? page.tags.toArray() : []).map(function (t) { return t.name; });
+%>
+<div class="read-progress" aria-hidden="true"></div>
+<article>
+  <header class="article-head">
+    <p class="article-meta">
+      <%= date(page.date, 'YYYY.MM.DD') %> · 约 <%= minutes %> 分钟
+      <% ptags.forEach(function (t) { %><span class="tag">#<%= t %></span><% }); %>
+    </p>
+    <h1><%= page.title %></h1>
+    <% if (page.excerpt) { %><p class="lede"><%= strip_html(page.excerpt) %></p><% } %>
+  </header>
+
+  <div class="prose">
+    <%- page.content %>
+  </div>
+
+  <footer class="article-foot">
+    <ul class="kv-list">
+      <li>
+        <span class="kv-key">// 标签</span>
+        <span class="kv-val">
+          <% ptags.forEach(function (t) { %><span class="tag">#<%= t %></span><% }); %>
+        </span>
+      </li>
+      <li>
+        <span class="kv-key">// 链接</span>
+        <span class="kv-val"><%= page.permalink.replace(/^https?:\/\//, '') %></span>
+      </li>
+    </ul>
+    <nav class="article-nav" aria-label="上一篇 / 下一篇">
+      <% if (page.prev) { %>
+      <a class="link-arrow link-arrow--back" href="<%- url_for(page.prev.path) %>"><%= page.prev.title %></a>
+      <% } else { %><span></span><% } %>
+      <% if (page.next) { %>
+      <a class="link-arrow" href="<%- url_for(page.next.path) %>"><%= page.next.title %></a>
+      <% } else { %><span></span><% } %>
+    </nav>
+  </footer>
+</article>

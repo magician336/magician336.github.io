@@ -1,0 +1,48 @@
+<%
+var sheets = site.data.cheatsheets || {};
+var sheetKeys = Object.keys(sheets);
+%>
+<header class="page-head">
+  <h1>工具</h1>
+  <p class="lede">我自己常查的速查表和小工具。<br>
+    按 <kbd class="kbd">Ctrl</kbd> + <kbd class="kbd">K</kbd> 快速跳转。</p>
+</header>
+
+<section class="section" aria-labelledby="cheat-sheets">
+  <h2 class="eyebrow" id="cheat-sheets">速查表</h2>
+  <div class="grid--3">
+    <% sheetKeys.forEach(function (key) { var s = sheets[key]; %>
+    <a class="card" href="<%- url_for('/tools/' + key + '/') %>">
+      <p class="eyebrow"><%= key %></p>
+      <p class="card-title"><%= s.title %></p>
+      <p class="card-desc"><%= s.desc %></p>
+      <span class="link-arrow">打开</span>
+    </a>
+    <% }); %>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="helpers" id="helpers">
+  <h2 class="eyebrow" id="helpers">小工具</h2>
+  <div class="grid--2">
+    <div class="card" id="helper-softmax">
+      <p class="eyebrow">softmax</p>
+      <p class="card-title">数值稳定的 softmax</p>
+      <p class="card-desc">粘贴一个向量，输出数值稳定的 softmax（内部是 log-sum-exp 技巧）</p>
+      <textarea rows="2" data-softmax-in placeholder="1.0 2.0 3.0 1000"></textarea>
+      <p><button class="btn" data-softmax-run>运行</button></p>
+      <output class="helper-out" data-softmax-out aria-live="polite"></output>
+    </div>
+    <div class="card" id="helper-complexity">
+      <p class="eyebrow">complexity viz</p>
+      <p class="card-title">复杂度曲线</p>
+      <p class="card-desc">看 O(n)、O(n log n)、O(n^2) 随 n 增长如何拉开差距</p>
+      <p>
+        <label for="complexity-n" class="sr-only">n 上限</label>
+        <input type="number" id="complexity-n" data-complexity-n value="200" min="10" max="10000">
+      </p>
+      <p><button class="btn" data-complexity-run>画图</button></p>
+      <canvas data-complexity-canvas width="560" height="260" style="max-width:100%"></canvas>
+    </div>
+  </div>
+</section>

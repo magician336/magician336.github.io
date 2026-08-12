@@ -1,0 +1,66 @@
+# Hexo Configuration
+# Site
+title: magician336
+subtitle: 计算机本科生
+description: 一个计算机本科生的项目与笔记。
+keywords: 计算机, 项目, 笔记
+author: magician336
+language: zh-CN
+timezone: ''
+
+# URL
+url: https://magician336.github.io
+root: /
+permalink: :year/:month/:title/
+permalink_defaults:
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :title.md
+default_layout: post
+titlecase: false
+external_link:
+  enable: true
+  field: site
+  exclude: ''
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+syntax_highlight:
+  enable: false
+  line_number: false
+
+# Home page
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date
+
+# Pagination
+per_page: 10
+pagination_dir: page
+
+# Feed (RSS)
+feed:
+  enable: true
+  type: atom
+  path: atom.xml
+  limit: 20
+
+# Theme
+theme: amber
+
+# Deployment
+deploy:
+  type: ''

@@ -1,0 +1,23 @@
+{
+  "name": "magician336-github-io",
+  "version": "1.0.0",
+  "private": true,
+  "hexo": {
+    "version": "7.3.0"
+  },
+  "description": "Personal site of magician336 — dark, amber-accented, annotated-code structural language.",
+  "scripts": {
+    "build": "hexo generate",
+    "server": "hexo server",
+    "clean": "hexo clean",
+    "deploy": "hexo deploy"
+  },
+  "dependencies": {
+    "hexo": "^7.3.0",
+    "hexo-generator-feed": "^4.0.0",
+    "hexo-generator-index": "^4.0.0",
+    "hexo-renderer-ejs": "^2.0.0",
+    "hexo-renderer-marked": "^7.0.1",
+    "hexo-server": "^3.0.0"
+  }
+}

@@ -1,0 +1,30 @@
+<%
+// 单个项目条目. full=true 时 projects 页 4 列 (含年月 + 链接)
+var tagStr = (p.tags || []).join(',').toLowerCase();
+%>
+<li class="work-item" data-status="<%= p.status %>" data-tags="<%= tagStr %>">
+  <span class="work-status work-status--<%= p.status %>"><%= p.status %></span>
+  <div>
+    <% if (p.slug) { %>
+    <a class="work-name" href="<%- url_for('/projects/' + p.slug + '/') %>"><%= p.name %></a>
+    <% } else { %>
+    <span class="work-name"><%= p.name %></span>
+    <% } %>
+    <p class="work-desc"><%= p.desc %></p>
+    <% if (p.tags && p.tags.length) { %>
+    <p class="work-tags">
+      <% p.tags.forEach(function (t) { %><span class="tag"><%= t %></span><% }); %>
+    </p>
+    <% } %>
+  </div>
+  <span class="work-date"><%= p.year %><% if (full && p.month) { %>.<%= String(p.month).padStart(2, '0') %><% } %></span>
+  <% if (full) { %>
+    <% if (p.links && p.links.live) { %>
+    <a class="work-link" href="<%= p.links.live %>">live -&gt;</a>
+    <% } else if (p.links && p.links.repo) { %>
+    <a class="work-link" href="<%= p.links.repo %>">repo -&gt;</a>
+    <% } else { %>
+    <span class="work-link">wip</span>
+    <% } %>
+  <% } %>
+</li>

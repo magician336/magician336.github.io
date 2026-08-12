@@ -1,0 +1,87 @@
+complexity:
+  title: Big-O 速查
+  desc: 常见复杂度一览
+  tables:
+    - caption: 数据结构 / 操作
+      headers: [结构, 访问, 查找, 插入, 空间]
+      rows:
+        - [静态数组, O(1), O(n), O(n), O(n)]
+        - [有序数组, "O(log n)", "O(log n)", O(n), O(n)]
+        - [哈希表, "O(1) 均摊", "O(1) 均摊", "O(1) 均摊", O(n)]
+        - [平衡二叉搜索树, "O(log n)", "O(log n)", "O(log n)", O(n)]
+        - [跳表, "O(log n)", "O(log n)", "O(log n)", O(n)]
+    - caption: 排序算法
+      headers: [算法, 最好, 平均, 最坏, 空间]
+      rows:
+        - [快速排序, "O(n log n)", "O(n log n)", "O(n^2)", "O(log n)"]
+        - [归并排序, "O(n log n)", "O(n log n)", "O(n log n)", O(n)]
+        - [堆排序, "O(n log n)", "O(n log n)", "O(n log n)", O(1)]
+latex:
+  title: LaTeX 数学符号
+  desc: 写机器学习笔记常用的符号
+  tables:
+    - caption: 微积分
+      headers: [符号, 命令, 含义]
+      rows:
+        - ["∂", "\\partial", 偏导数]
+        - ["∇", "\\nabla", 梯度]
+        - ["∑", "\\sum_{i=1}^{n}", 求和]
+        - ["∘", "\\circ", 函数复合]
+    - caption: 线性代数
+      headers: [符号, 命令, 含义]
+      rows:
+        - ["xᵀ", "x^{\\top}", 转置]
+        - ["⟨u,v⟩", "\\langle u, v \\rangle", 内积]
+        - ["‖x‖₂", "\\|x\\|_2", L2 范数]
+        - ["A⁻¹", "A^{-1}", 逆矩阵]
+git:
+  title: git 常用命令
+  desc: 我总是记不住的命令
+  tables:
+    - caption: 撤销
+      headers: [命令, 作用]
+      rows:
+        - ["git restore <file>", 丢弃未暂存的改动]
+        - ["git restore --staged <file>", 取消暂存，保留改动]
+        - ["git commit --amend", 改写上一次提交]
+        - ["git reset --soft HEAD~1", 撤销提交，保留暂存]
+    - caption: 查看
+      headers: [命令, 作用]
+      rows:
+        - ["git log --oneline --graph", 紧凑的历史图]
+        - ["git diff --stat", 改动概览]
+        - ["git stash -u", 连未跟踪文件一起 stash]
+        - ["git bisect start", 二分定位回归]
+shell:
+  title: shell 一行命令
+  desc: 反复在用的 one-liner
+  tables:
+    - caption: 文件
+      headers: [命令, 作用]
+      rows:
+        - ["du -sh * | sort -h", 按大小排序，小的在前]
+        - ["find . -name '*.log' -mtime +7 -delete", 删除 7 天前的日志]
+        - ["rg -l 'foo' | xargs sed -i 's/foo/bar/'", 跨文件替换]
+    - caption: 进程
+      headers: [命令, 作用]
+      rows:
+        - ["ps aux --sort=-%mem | head", 内存占用最高的进程]
+        - ["kill -9 $(lsof -t -i:8080)", 释放端口]
+        - ["watch -n1 nvidia-smi", 实时看 GPU 占用]
+python:
+  title: NumPy / 张量笔记
+  desc: 每周都要查的张量操作
+  tables:
+    - caption: 形状
+      headers: [操作, 示例, 作用]
+      rows:
+        - ["reshape", "x.reshape(b, -1)", 压平后面的维度]
+        - ["broadcast", "x + b[None, :]", 加行向量]
+        - ["einsum", "einsum('ij,jk->ik', a, b)", 显式矩阵乘]
+        - ["permute", "x.permute(0, 2, 1)", 交换轴 (torch)]
+    - caption: 数值
+      headers: [操作, 示例, 作用]
+      rows:
+        - ["logsumexp", "scipy.special.logsumexp", 稳定的 log-of-sum-of-exp]
+        - ["clip", "np.clip(x, -c, c)", 压住爆炸的梯度]
+        - ["softmax", "exp(x - max) / sum(...)", 永远不要直接 exp(x)]

@@ -1,0 +1,89 @@
+- slug: lingdoc
+  name: 灵档 LingDoc
+  status: wip
+  year: 2026
+  month: 08
+  desc: 大创项目——个人文档 AI 知识库。文件夹变成可对话的库：AI 智能规整、知识问答、表格自动填写、混合检索、关系图谱。
+  tags: [Electron, React, Spring Boot, FastAPI, RAG, 大创]
+  story:
+    - 灵档想解决一个具体的问题：个人文档散在文件夹里，找起来靠回忆，用起来靠肉眼。它把文件夹变成可对话的知识库——丢进去的文档自动被理解、分类、打标签，之后可以直接提问，像和一个知道所有文件内容的人在聊天。
+    - 架构上分成三层：Electron + React 的桌面客户端负责界面，Spring Boot + SQLite 的本地服务管数据，Python FastAPI + Celery 的 AI 服务处理规整与问答。三层本地部署，检索走全文 + 向量 + BM25 的混合策略。
+    - 这是我现在投入最多的项目，作为大创课题持续迭代中。
+  highlights:
+    - 多仓库 Vault 文件库：拖拽上传、文件夹同步、版本历史
+    - AI 智能规整：自动生成摘要、关键词、分类标签
+    - 知识问答支持多轮工具调用，表格填写可基于模板 + 参考文档自动填充
+    - 三层服务本地运行，混合检索（全文 + 语义 + BM25）
+  stack: [Electron, React, Vite, Tailwind, Java, Spring Boot, MyBatis, SQLite, Python, FastAPI, Celery, Redis]
+
+- slug: coderadar
+  name: CodeRadar
+  status: shipped
+  year: 2026
+  month: 06
+  desc: 智能体实训项目——AI 编程助手竞品分析系统。采集竞品多源数据，Mini-RAG 混合检索 + LangChain Multi-Agent 生成情报卡片与能力快照。
+  tags: [Python, LangChain, FastAPI, Elasticsearch, Vue, RAG]
+  story:
+    - CodeRadar 是智能体实训四周的产物：给 AI 编程助手（Cursor、GitHub Copilot、Trae、通义灵码、CodeGeeX）建一套竞品分析系统。数据从多源采集，清洗、标注、版本化后进 Mini-RAG 索引，检索结果可追溯、可验证。
+    - 分析层由 LangChain Multi-Agent 承担：一个 Agent 产出情报卡片，一个做 D1-D7 能力快照，一个生成基准对比与 Markdown 简报。前端是 Vue 3，三个服务用 docker-compose 编排。
+    - 实训四周围绕「数据 -> 检索 -> Agent -> 交付物」的完整闭环推进，最后一周补上 SQLite 持久化、异步工作流和带认证限流的正式 API。
+  highlights:
+    - Mini-RAG 混合检索，证据可溯源、可验证
+    - LangChain Multi-Agent 分工产出情报卡片、能力快照与基准对比
+    - 第四周落地正式 API：API-Key 认证、限流、审计
+    - Vue 3 前端 + Elasticsearch / API / Worker 三服务 docker-compose
+  stack: [Python, FastAPI, LangChain, Elasticsearch, SQLite, Alembic, Celery, Vue 3, Docker]
+  links:
+    repo: https://github.com/magician336/competitor-analysis-system
+
+- slug: huabu
+  name: 画布 huabu-front
+  status: shipped
+  year: 2025
+  month: 12
+  desc: 仿 Excalidraw 的 Web 画布绘图应用，Vue 3 + 原生 Canvas 实现，支持协同编辑与离线编辑。
+  tags: [Vue 3, Canvas, Socket.IO, 前端]
+  story:
+    - 前端实训营的课题作业：从零写一个画布类产品。约束是只能用原生 Canvas API，不能用 konva、tldraw 这类现成库——正好逼着自己把画布底层的渲染、命中和变换逻辑摸了一遍。
+    - 功能最后远超课题 P0 要求：无限画布带小地图、自定义滚动条、辅助线对齐、多元素打组、undo/redo；P1 级的协同编辑用 Socket.IO 实现，断网时切到离线模式，网络恢复后自动提交。
+    - 一个月 35 次提交，从空白页面到一个能协同画图的完整应用。
+  highlights:
+    - 原生 Canvas 实现图形/图片/富文本绘制与编辑，无第三方绘图库
+    - 无限画布：minimap 小地图、辅助线、多元素打组、undo/redo
+    - Socket.IO 协同编辑 + 断网离线编辑、恢复后自动提交
+    - 附带 AI 生图功能
+  stack: [Vue 3, Vite, Canvas, Socket.IO, Express]
+  links:
+    repo: https://gitee.com/jie1015034983/huabu-front
+
+- slug: secondhand
+  name: 校园二手交易平台
+  status: shipped
+  year: 2026
+  month: 06
+  desc: 移动应用开发课设——HarmonyOS 端 + Spring Boot 后端的校园二手交易平台。
+  tags: [HarmonyOS, ArkTS, Spring Boot, 移动开发]
+  story:
+    - 移动应用开发课的大作业：一个校园场景的二手交易平台。前端用 HarmonyOS ArkTS 从零写，覆盖登录、商品发布与浏览、订单流程、站内聊天和个人资料等完整闭环。
+    - 后端是 Spring Boot 3 的独立服务，与端上通过 REST 接口对接。做这个项目最直接的收获是把移动端开发的完整链路走了一遍——页面、状态、接口联调、真机运行。
+  highlights:
+    - HarmonyOS 原生应用（ArkTS），非跨平台框架
+    - 完整交易闭环：商品、订单、聊天、个人中心
+    - Spring Boot 3 独立后端，REST 接口对接
+  stack: [HarmonyOS, ArkTS, Spring Boot, Java]
+
+- slug: milktea
+  name: 奶茶店管理系统
+  status: shipped
+  year: 2026
+  month: 06
+  desc: 数据库系统课设——基于若依框架二次开发的奶茶门店后台，存储过程、触发器、视图全部真实接入 Java 层。
+  tags: [Spring Boot, MyBatis, MySQL, 数据库]
+  story:
+    - 数据库系统课设，要求不只是在课堂上建两张表——我把「奶茶店管理」做成一个能跑的完整系统：基于若依（RuoYi）单体框架二次开发，业务覆盖分类、商品、员工、库存、订单的完整管理闭环。
+    - 数据库是这门课的主角：7 张业务表用 PowerDesigner 建模，写了带事务保护级联删除的存储过程、自动结算订单金额的存储过程、库存不足自动报错的触发器，以及 5 表关联的视图——并且全部真实接进 Java 层的 Controller，不是建完表就完事。
+  highlights:
+    - 7 张业务表 PowerDesigner 建模，含 E-R 设计文档
+    - 存储过程：事务级联删除、三表 JOIN 自动结算；触发器：库存校验与自动扣减；视图：5 表关联综合查询
+    - 7 个 CRUD 业务模块 + 菜单/按钮级权限配置，带 Excel 导出
+  stack: [Spring Boot, MyBatis, MySQL, Shiro, Thymeleaf, PowerDesigner]

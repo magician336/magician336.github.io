@@ -3,18 +3,20 @@
   status: wip
   year: 2026
   month: 08
-  desc: 大创项目——个人文档 AI 知识库。文件夹变成可对话的库：AI 智能规整、知识问答、表格自动填写、混合检索、关系图谱。
-  tags: [Electron, React, Spring Boot, FastAPI, RAG, 大创]
+  desc: 大创课题——科研项目写作与交付工作台。把研究条件、项目资料、AI 调研、章节写作、证据核查、版本确认和 Word 交付连成一条可追溯流程，以 WeKnora 为基座。
+  tags: [Go, Vue, RAG, WeKnora, 大创]
   story:
-    - 灵档想解决一个具体的问题：个人文档散在文件夹里，找起来靠回忆，用起来靠肉眼。它把文件夹变成可对话的知识库——丢进去的文档自动被理解、分类、打标签，之后可以直接提问，像和一个知道所有文件内容的人在聊天。
-    - 架构上分成三层：Electron + React 的桌面客户端负责界面，Spring Boot + SQLite 的本地服务管数据，Python FastAPI + Celery 的 AI 服务处理规整与问答。三层本地部署，检索走全文 + 向量 + BM25 的混合策略。
-    - 这是我现在投入最多的项目，作为大创课题持续迭代中。
+    - 2026 年 8 月作为大创课题起步，最初想做个人文档知识库；三个月后转向更具体的场景——科研人员与课题组的课题申报写作。
+    - 基座是腾讯开源的 WeKnora：整仓携带其代码，灵档的业务层（internal/lingdoc）叠加其上——检索、解析、知识库管理复用成熟实现，力气花在链路语义上。
+    - 后端 Go（gin + asynq），文档解析与 MCP 工具各是一个 Python 服务，前端 Vue 3 + TipTap；基础设施 ParadeDB、Doris、Neo4j、Langfuse、Dex。
+    - 这是我现在投入最多的项目，正在向 Beta 首版推进。
   highlights:
-    - 多仓库 Vault 文件库：拖拽上传、文件夹同步、版本历史
-    - AI 智能规整：自动生成摘要、关键词、分类标签
-    - 知识问答支持多轮工具调用，表格填写可基于模板 + 参考文档自动填充
-    - 三层服务本地运行，混合检索（全文 + 语义 + BM25）
-  stack: [Electron, React, Vite, Tailwind, Java, Spring Boot, MyBatis, SQLite, Python, FastAPI, Celery, Redis]
+    - 研究条件 → 资料 → AI 调研 → 章节写作 → 证据核查 → 版本确认 → Word 交付，全链路可追溯
+    - AI 写作按动作发起（提纲/续写/改写/压缩等），采纳需显式确认写到哪一段——「好的」不构成采纳凭据
+    - Beta 首版真实验收有严格定义：隔离环境、真实服务、合成材料、真实 Word 检查，Mock 与单人演示不算
+  stack: [Go, gin, asynq, Python, Playwright, Vue 3, TipTap, TDesign, PostgreSQL, Milvus, Neo4j, Docker]
+  links:
+    repo: https://github.com/magician336/lingdoc
 
 - slug: coderadar
   name: CodeRadar
@@ -27,11 +29,13 @@
     - CodeRadar 是智能体实训四周的产物：给 AI 编程助手（Cursor、GitHub Copilot、Trae、通义灵码、CodeGeeX）建一套竞品分析系统。数据从多源采集，清洗、标注、版本化后进 Mini-RAG 索引，检索结果可追溯、可验证。
     - 分析层由 LangChain Multi-Agent 承担：一个 Agent 产出情报卡片，一个做 D1-D7 能力快照，一个生成基准对比与 Markdown 简报。前端是 Vue 3，三个服务用 docker-compose 编排。
     - 实训四周围绕「数据 -> 检索 -> Agent -> 交付物」的完整闭环推进，最后一周补上 SQLite 持久化、异步工作流和带认证限流的正式 API。
+    - 我担任组长，负责技术方案与任务拆解，结题时团队获「优秀团队」称号。
   highlights:
     - Mini-RAG 混合检索，证据可溯源、可验证
     - LangChain Multi-Agent 分工产出情报卡片、能力快照与基准对比
     - 第四周落地正式 API：API-Key 认证、限流、审计
     - Vue 3 前端 + Elasticsearch / API / Worker 三服务 docker-compose
+    - 担任组长，结题获实训「优秀团队」称号
   stack: [Python, FastAPI, LangChain, Elasticsearch, SQLite, Alembic, Celery, Vue 3, Docker]
   links:
     repo: https://github.com/magician336/competitor-analysis-system

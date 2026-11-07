@@ -4,3 +4,4 @@ db.json
 *.log
 .DS_Store
 .deploy_git/
+.worktrees/

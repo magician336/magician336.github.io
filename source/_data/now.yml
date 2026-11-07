@@ -1,5 +1,8 @@
+- key: status
+  val: 求职中：2027 届实习（Go 后端 / Agent Infra）
+  meta: 北京优先 · 随时到岗 · 可实习 6 个月
+- key: building
+  val: Flamingos——MCP 反向代理网关（四周冲刺，至 11 月底）
 - key: learning
   val: CS230 深度学习 · CS231n 计算机视觉
   meta: "@ Stanford 公开课"
-- key: building
-  val: 大创项目「灵档」

@@ -14,11 +14,16 @@ layout: page
 
 <ul class="kv-list">
   <li><span class="kv-key">school</span><span class="kv-val">南开大学 计算机科学与技术</span></li>
-  <li><span class="kv-key">year</span><span class="kv-val">本科 2028 届 · 大二升大三</span></li>
+  <li><span class="kv-key">year</span><span class="kv-val">本科 2028 届 · 大三</span></li>
   <li><span class="kv-key">location</span><span class="kv-val">天津</span></li>
-  <li><span class="kv-key">focus</span><span class="kv-val">人工智能 · 机器学习</span></li>
+  <li><span class="kv-key">focus</span><span class="kv-val">Agent Infra · 存储 · Go 后端</span></li>
   <li><span class="kv-key">origin</span><span class="kv-val">从打游戏到想弄明白电脑怎么跑</span></li>
 </ul>
+
+<p class="eyebrow">经历与荣誉</p>
+
+- **开源之夏 OSPP 2026 · 已结项** — Tencent/ncnn 社区课题「pnnx 支持 torch.export(.pt2)」：[PR #6953](https://github.com/Tencent/ncnn/pull/6953)，+9365 行、42 文件、44 轮评审往返；PR 未合并，课题按期结项
+- **华数杯数学建模一等奖**
 
 <p class="eyebrow">兴趣方向</p>
 

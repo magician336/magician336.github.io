@@ -1,6 +1,43 @@
+- slug: elena
+  name: Elena
+  status: shipped
+  year: 2026
+  month: 11
+  desc: 纯 Go 手写的 Bitcask 模型嵌入式存储引擎——为长时运行 Agent 的持久化状态（会话轨迹、检查点、TTL、时间点读）而设计，kill -9 故障注入直接跑在 CI 里。
+  tags: [Go, 存储引擎, Bitcask, Agent Infra, 基准测试]
+  story:
+    - 想给 Agent 运行时一个「事件追加 + 检查点恢复」的本地状态层，又不想引入外部数据库，于是从 Bitcask 模型起步写了一个嵌入式引擎：单目录、零外部依赖。
+    - 默认持久层每写 fdatasync 后确认；kill -9 故障注入套件纳入 CI——任意两次确认写入之间进程被杀，重开后字节级零丢失。
+    - 基准不挑好看的讲：P50/P99/P999、YCSB A/B/C、64B-16KB 五档，对照 bbolt / badger / rosedb；大 value 随机读输给 bbolt 的 mmap，报告连输的原因一起写——只报赢的是广告，不是证据。
+  highlights:
+    - kill -9 故障注入纳入 CI，确认写入重开字节级零丢失
+    - 语义层：namespace 会话、append-only 轨迹、会话 TTL、检查点、时间点读
+    - race 检测下测试覆盖率 ≥ 80%，v0.1.0 已发布
+    - 恢复实测：256MB 166-176ms / 4GiB 7.8-10.6s 到首个字节级一致读
+  stack: [Go, Bitcask, fdatasync, YCSB, GitHub Actions]
+  links:
+    repo: https://github.com/magician336/Elena
+
+- slug: flamingos
+  name: Flamingos
+  status: wip
+  year: 2026
+  month: 11
+  desc: MCP 反向代理网关（Go）——AI Agent 统一接入多个 MCP 工具服务的治理层：RBAC 鉴权、令牌桶限流、审计与 OpenTelemetry 全链路追踪。
+  tags: [Go, MCP, Agent Infra, OpenTelemetry, 网关]
+  story:
+    - Agent 接的工具越来越多，每个 MCP Server 各自为政：谁都能调、调用没记录、出了问题查不到链路。Flamingos 把这些收进一个网关。
+    - 双平面中间件链：接入面做 Origin 校验、令牌桶限流、角色提取；消息面做追踪、策略决策、审计、RBAC 判定；拒绝路径同样落审计。
+    - 基于官方 MCP Go SDK；规格驱动 + 架构评审迭代，中间件执行顺序用逐对定点测试钉死。
+  highlights:
+    - RBAC 鉴权 + 令牌桶限流 + 审计，拒绝路径同样留痕
+    - OpenTelemetry 全链路追踪，OTLP 导出可接 Jaeger
+    - 中间件链执行顺序以定点测试固化
+  stack: [Go, MCP Go SDK, OpenTelemetry, gRPC]
+
 - slug: lingdoc
   name: 灵档 LingDoc
-  status: wip
+  status: shipped
   year: 2026
   month: 08
   desc: 大创课题——科研项目写作与交付工作台。把研究条件、项目资料、AI 调研、章节写作、证据核查、版本确认和 Word 交付连成一条可追溯流程，以 WeKnora 为基座。
@@ -9,11 +46,12 @@
     - 2026 年 8 月作为大创课题起步，最初想做个人文档知识库；三个月后转向更具体的场景——科研人员与课题组的课题申报写作。
     - 基座是腾讯开源的 WeKnora：整仓携带其代码，灵档的业务层（internal/lingdoc）叠加其上——检索、解析、知识库管理复用成熟实现，力气花在链路语义上。
     - 后端 Go（gin + asynq），文档解析与 MCP 工具各是一个 Python 服务，前端 Vue 3 + TipTap；基础设施 ParadeDB、Doris、Neo4j、Langfuse、Dex。
-    - 这是我现在投入最多的项目，正在向 Beta 首版推进。
+    - 2026 年 11 月 5 日，Beta 首版验收通过——7 大模块、25 项功能规格全部交付关闭；软件著作权已下证，市级大创中期检查通过。
   highlights:
     - 研究条件 → 资料 → AI 调研 → 章节写作 → 证据核查 → 版本确认 → Word 交付，全链路可追溯
     - AI 写作按动作发起（提纲/续写/改写/压缩等），采纳需显式确认写到哪一段——「好的」不构成采纳凭据
     - Beta 首版真实验收有严格定义：隔离环境、真实服务、合成材料、真实 Word 检查，Mock 与单人演示不算
+    - 已获软件著作权；Beta 首版验收通过；市级大创中期通过
   stack: [Go, gin, asynq, Python, Playwright, Vue 3, TipTap, TDesign, PostgreSQL, Milvus, Neo4j, Docker]
   links:
     repo: https://github.com/magician336/lingdoc
@@ -22,7 +60,7 @@
   name: CodeRadar
   status: shipped
   year: 2026
-  month: 06
+  month: 07
   desc: 智能体实训项目——AI 编程助手竞品分析系统。采集竞品多源数据，Mini-RAG 混合检索 + LangChain Multi-Agent 生成情报卡片与能力快照。
   tags: [Python, LangChain, FastAPI, Elasticsearch, Vue, RAG]
   story:
